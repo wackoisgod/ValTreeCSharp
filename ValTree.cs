@@ -37,7 +37,18 @@ namespace ConsoleApplication2
 			int i = findNewline(s, start);
 			for (; i < s.Length && (s[i] == '\n' || s[i] == '\r'); i++)
 				;
-			return i;
+			return skipComment(s, i);
+		}
+
+		static int skipComment(string s, int start)
+		{
+			// so we have found a comment
+			if (start < s.Length && s[start] == ';')
+			{
+				return findAfterNewline(s, start);
+			}
+
+			return start;
 		}
 
 		private string _key;
@@ -46,6 +57,22 @@ namespace ConsoleApplication2
 		private double _valFloat;
 		private List<ValTree> _children = new List<ValTree>();
 		private List<ValTree> _siblings = new List<ValTree>();
+
+		public List<ValTree> Children
+		{
+			get
+			{
+				return _children;
+			}
+		}
+
+		public List<ValTree> Siblings
+		{
+			get
+			{
+				return _siblings;
+			}
+		}
 
 		private void SetValInt()
 		{
@@ -73,7 +100,8 @@ namespace ConsoleApplication2
 			var depth = GetDepth(data, pos);
 			if (depth < 0) return false;
 
-			int nextPos = findAfterNewline(data, pos);
+			int nextPos = skipComment(data, pos);
+			nextPos = findAfterNewline(data, nextPos);
 			int childDepth = GetDepth(data, nextPos);
 
 			int startPos = pos + depth;
@@ -191,7 +219,7 @@ namespace ConsoleApplication2
 			if (key == _key)
 				return this;
 
-			return _siblings.Where(x => x._key == _key).SingleOrDefault();
+			return _siblings.Where(x => x._key == key).SingleOrDefault();
 		}
 
 		public void AddChild(ref ValTree v)
@@ -223,9 +251,9 @@ namespace ConsoleApplication2
 		static void InternalLog(ref StringBuilder sb, ValTree inValue, int depth)
 		{
 			for (int i = 0; i < depth; i++)
-				sb.Append("\t");
+				sb.AppendFormat("\t");
 
-			sb.Append(inValue.GetKey() + " " + inValue.GetValue());
+			sb.AppendFormat(inValue.GetKey() + " " + inValue.GetValue());
 			if (inValue.HasChildren())
 			{
 				foreach (var c in inValue._children)
