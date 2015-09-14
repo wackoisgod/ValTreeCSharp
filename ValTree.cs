@@ -126,10 +126,11 @@ namespace ConsoleApplication2
 			pos = nextPos;
 
 			if (childDepth > depth)
-			{
-				ValTree v = new ValTree();
-				if (v.Parse(data, ref pos, true))
-					_children.Add(v);
+			{ 
+				_children.Add(new ValTree());
+				if (!_children.Last().Parse(data, ref pos, true))
+					_children.RemoveAt(_children.Count - 1);
+					
 				childDepth = GetDepth(data, pos);
 			}
 
@@ -138,10 +139,11 @@ namespace ConsoleApplication2
 				bool success = true;
 				while (success && childDepth == depth)
 				{
-					ValTree v = new ValTree();
-					success = v.Parse(data, ref pos, false);
-					if (success)
-						_siblings.Add(v);
+					_siblings.Add(new ValTree());
+					success = _siblings.Last().Parse(data, ref pos, false);
+					if (!success)
+						_siblings.RemoveAt(_siblings.Count - 1);
+						
 					childDepth = GetDepth(data, pos);
 				}
 				return _siblings.Count > 0;
