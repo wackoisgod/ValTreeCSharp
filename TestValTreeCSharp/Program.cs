@@ -14,7 +14,7 @@ namespace ValTreeCSharp
         {
             var testValTree = new ValTree();
             string path = Directory.GetCurrentDirectory();
-            var worked = testValTree.Parse(path + "/TestData/PuzzleExample.txt");
+            var worked = testValTree.Parse(path + "/TestData.txt");
 
             var parent = testValTree.GetChild("properties");
 

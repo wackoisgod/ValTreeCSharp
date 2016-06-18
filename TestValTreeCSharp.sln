@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.25123.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ValTreeCSharp", "ValTreeCSharp\ValTreeCSharp.csproj", "{310F4B51-6B10-436F-827E-C0FC09D7F6FE}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestValTreeCSharp", "TestValTreeCSharp\TestValTreeCSharp.csproj", "{310F4B51-6B10-436F-827E-C0FC09D7F6FE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
