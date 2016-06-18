@@ -245,7 +245,7 @@ namespace TinyArms
             return (index < _children.Count ? _children[index] : blank);
         }
 
-        public void AddChild(ref ValTree v)
+        public void AddChild(ValTree v)
         {
             _children.Add(v);
         }
@@ -269,7 +269,7 @@ namespace TinyArms
             if (pos == -1)
             {
                 ValTree yy = new ValTree(query, value);
-                AddChild(ref yy);
+                AddChild(yy);
                 return;
             }
 
@@ -283,7 +283,7 @@ namespace TinyArms
             {
                 ValTree xx = new ValTree(k, string.Empty);
                 xx.AddChild(v, value);
-                AddChild(ref xx);
+                AddChild(xx);
             }
             else
             {
